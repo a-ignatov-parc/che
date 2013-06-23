@@ -7,6 +7,8 @@
     # Переопределяем дефолтные параметры конфига, если надо
     config.setup customConfig if customConfig
 
+    ooo.aaa
+
     # Подключаем опциональные модули
     customConfig.modules ?= []
     for module in customConfig.modules when config._modules[module]?
