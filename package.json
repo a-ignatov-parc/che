@@ -34,7 +34,10 @@
     "grunt-open": "~0.2.0",
     "grunt-concat-sourcemap": "*",
     "generate-sourcemap": "*",
-    "grunt-notify": "~0.2.4"
+    "grunt-notify": "~0.2.4",
+    "convert-source-map": "*",
+    "parse-base64vlq-mappings": "*",
+    "combine-source-map": "*"
   },
   "some": {
     "jade": "*",

@@ -14,6 +14,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-concat-sourcemap"
   grunt.loadNpmTasks "generate-sourcemap"
   grunt.loadNpmTasks "grunt-notify"
+  grunt.loadNpmTasks "combine-source-map"
   grunt.loadTasks "tasks"
 
   grunt.initConfig
