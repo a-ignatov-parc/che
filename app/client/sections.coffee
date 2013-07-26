@@ -38,7 +38,8 @@ define ["history", "events", "sections/loader", "sections/transition", "sections
     # и обновляем его данные
     #
     create: (state) ->
-      state = state or {index: 0, url: window.location.href, sectionsHeader: []}
+      state = state or new window.history.CheState
+
       if @last? and state.index <= @last.index
         transition = @go state.index
         transition.update state
@@ -46,7 +47,13 @@ define ["history", "events", "sections/loader", "sections/transition", "sections
       else
         isNewState = (history.state or {}).url isnt state.url
         method = if isNewState then "pushState" else "replaceState"
+
+        console.debug 1, window.pageYOffset
+
         history[method] state, state.title, state.url
+
+        console.debug 2, window.pageYOffset, state
+
         @last = new Transition state, @last
         return @last
 
@@ -113,6 +120,10 @@ define ["history", "events", "sections/loader", "sections/transition", "sections
       #if state.url? and state.sectionsHeader? and state.sectionsHeader.length and state.method?.toLowerCase() != 'post'
       if state.url? and state.sectionsHeader?.length and state.method?.toLowerCase() != 'post'
         sectionsLoader state.url, state.method, state.sectionsHeader, state.index
+      
+      console.debug "pop", state.scrollPos
+
+      window.scrollTo state.scrollPos.left, state.scrollPos.top if state.scrollPos?
     # here ask server for updated sections (history case)
 
   #### Событие transition:current:update

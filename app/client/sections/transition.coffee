@@ -106,9 +106,15 @@ define [
     next: (to_transition) ->
       transition = @
       if to_transition isnt @index and @next_transition?
+
+        console.debug "rememberScroll", @state
+
+        @state.rememberScroll() if @state?.rememberScroll?
         transition = @next_transition
         @next_transition.invoke()
         if to_transition? then @next_transition.next(to_transition)
+
+      window.scrollTo 0, 0
 
       if to_transition is @index or not to_transition
         asyncQueue.next ->
