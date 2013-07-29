@@ -8,11 +8,30 @@
 define ['events'], (events) ->
   return false if not window.history or not window.history.pushState
 
+  State = (options) ->
+    scroll = @getScroll()
+
+    @che = true
+    @url = options.url or window.location.href
+    @index = options.index or 0
+    @method = options.method or "GET"
+    @sections = options.sections
+    @sectionsHeader = options.sectionsHeader or []
+    @scrollPos =
+      top: options.scrollTop or scroll.top
+      left: options.scrollLeft or scroll.left
+
+  State:: = 
+    getScroll: ->
+      top: window.pageYOffset or document.documentElement.scrollTop
+      left: window.pageYOffset or document.documentElement.scrollLeft
+
   ###
     Workaround with Chrome popsate on very first page load. Get idea from jquery.pjax
   ###
   initialUrl = window.location.href
   popped = 'state' of window.history
+  window.history.CheState = State
 
   originOnpopstate = window.onpopstate
   window.onpopstate = (popStateEvent)->

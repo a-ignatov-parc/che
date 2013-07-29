@@ -23,11 +23,12 @@ define ["ajax", "events", "dom", "underscore"], (ajax, events, dom, _) ->
   #
   (url, method, sectionsHeader, index, data = []) ->
     getState = (url, sections) ->
-      url: url
-      sectionsHeader: sectionsHeader
-      index: index
-      method: method
-      sections: sections
+      new window.history.CheState
+        url: url
+        sectionsHeader: sectionsHeader
+        index: index
+        method: method
+        sections: sections
 
     queryRequest = () ->
       sectionsContainer = dom(sectionsHeader)
